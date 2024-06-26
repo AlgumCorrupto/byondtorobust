@@ -1,0 +1,8 @@
+{
+    "Space" : "/arena/space",
+    "Plating" : "/turf/simulated/floor/plating",
+    "Lattice": "/obj/lattice",
+    "Catwalk": "/turf/simulated/floor/airless/plating/catwalk",
+    "FloorGrassJungle": "/turf/simulated/floor/grass/leafy",
+    "FloorGrass": "\"/turf/simulated/floor/grass\""
+}

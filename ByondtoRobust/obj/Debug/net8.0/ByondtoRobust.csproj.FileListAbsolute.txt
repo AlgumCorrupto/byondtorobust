@@ -1,0 +1,14 @@
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\ByondtoRobust.GeneratedMSBuildEditorConfig.editorconfig
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\ByondtoRobust.AssemblyInfoInputs.cache
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\ByondtoRobust.AssemblyInfo.cs
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\ByondtoRobust.csproj.CoreCompileInputs.cache
+D:\dev\byondtorobust\ByondtoRobust\bin\Debug\net8.0\ByondtoRobust.exe
+D:\dev\byondtorobust\ByondtoRobust\bin\Debug\net8.0\ByondtoRobust.deps.json
+D:\dev\byondtorobust\ByondtoRobust\bin\Debug\net8.0\ByondtoRobust.runtimeconfig.json
+D:\dev\byondtorobust\ByondtoRobust\bin\Debug\net8.0\ByondtoRobust.dll
+D:\dev\byondtorobust\ByondtoRobust\bin\Debug\net8.0\ByondtoRobust.pdb
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\ByondtoRobust.dll
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\refint\ByondtoRobust.dll
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\ByondtoRobust.pdb
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\ByondtoRobust.genruntimeconfig.cache
+D:\dev\byondtorobust\ByondtoRobust\obj\Debug\net8.0\ref\ByondtoRobust.dll
