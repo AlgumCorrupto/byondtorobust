@@ -35,18 +35,11 @@ namespace Dmm
             var floorToId = new Dictionary<string, int>();
             foreach (var (idNum, idStr) in TileIdMap.OrderBy(x => x.Key))
             {
-                //tileMap.Add(idNum.ToString(), idStr.ToString());
                 tileMap += $"  {idNum.ToString()}: {idStr.ToString()}\n";
                 floorToId.Add(idStr, idNum);
             }
             root += tileMap;
-            // entity section
-            //var entities = new SequenceDataNode();
-            //root.Add("entities", entities);
-            //var uid = 2;
-            //var temp = new MappingDataNode();
-            //var tileX = 0;
-            //var tileY = 0;
+
             int[,] currTileBuffer = new int[16, 16];
             var nChunksX = (int) (map.MaxX / 16) + 1;
             var nChunksY = (int) (map.MaxX / 16) + 1;
@@ -85,7 +78,6 @@ namespace Dmm
                             + $"  - uid: {uid}\n"
                             + $"    components:\n"
                             + $"    - type: Transform\n"
-                            + $"      rot: 0 rad\n"
                             + $"      pos: {tile.X + 0.5},{tile.Y + 0.5}\n"
                             + $"      parent: 1\n";
                             int chunkX = tile.X / 16;
@@ -100,7 +92,6 @@ namespace Dmm
                     {
                         if (floormap.Value == obj)
                         {
-                            Console.WriteLine(floorToId[floormap.Key]);
                             int chunkX = tile.X / 16;
                             int chunkY = tile.Y / 16;
                             chunkIds[chunkX * nChunksX + chunkY][tile.X % 16, tile.Y % 16] = floorToId[floormap.Key];
@@ -124,121 +115,14 @@ namespace Dmm
             + "- type: Fixtures\n"
             + "  fixtures: {}\n"
             + "- type: BecomesStation\n"
-            + "  id: centcomm\n"
+            + "  id: test\n"
             + "- type: Gravity\n"
             + "  gravityShakeSound: !type:SoundPathSpecifier\n"
             + "    path: /Audio/Effects/alert.ogg\n";
             root += entityStr;
+            root += "...\n";
             return root;
         }
-        // i've just copied some of the maploadersystem's functions here
-        //// rewrote some things here and there
-        //public YamlDocument DoConversion(DmmMap map, DmmAdapter adapter)
-        //{
-        //    var root = new MappingDataNode();
-        //    // write meta section
-        //    var meta = new MappingDataNode();
-        //    root.Add("meta", meta);
-        //    meta.Add("format", "6");
-        //    meta.Add("postmapinit", "true");
-//
-        //    // write tile map section
-        //    int i = 0;
-        //    TileIdMap = new Dictionary<int, string>();
-        //    IdTileMap = new Dictionary<string, int>();
-        //    foreach (var tile in adapter.TileMap)
-        //    {
-        //        // i've spent 2 fucking hours looking for this...
-        //        var tileDef = _tiles.Where(s => s.ID.Equals(tile)).First();
-        //        TileIdMap.Add(tileDef.TileId, tileDef.ID);
-        //        IdTileMap.Add(tileDef.ID, tileDef.TileId);
-        //    }
-        //    var tileMap = new MappingDataNode();
-        //    var floorToId = new Dictionary<string, int>();
-        //    root.Add("tilemap", tileMap);
-        //    foreach (var (idNum, idStr) in TileIdMap.OrderBy(x => x.Key))
-        //    {
-        //        tileMap.Add(idNum.ToString(), idStr.ToString());
-        //        floorToId.Add(idStr, idNum);
-        //    }
-//
-        //    // entity section
-        //    var entities = new SequenceDataNode();
-        //    root.Add("entities", entities);
-        //    var uid = 2;
-        //    var temp = new MappingDataNode();
-        //    var tileX = 0;
-        //    var tileY = 0;
-        //    int[,] currTileBuffer = new int[16, 16];
-        //    var nChunksX = (int) (map.MaxX / 16) + 1;
-        //    var nChunksY = (int) (map.MaxX / 16) + 1;
-        //    int[][,] chunkIds = new int[nChunksX * nChunksY][,];
-//
-        //    // map proto
-        //    var mapProto = GenerateMapProto();
-//
-        //    // write all of the tiles
-        //    foreach (var tile in map.Tiles)
-        //    {
-        //        foreach (var obj in tile.Objs)
-        //        {
-        //            // write all of the entities
-        //            foreach (var entitymap in adapter.EntityMap)
-        //            {
-        //                if (entitymap.Value == obj)
-        //                {
-        //                    var xformComp = new TransformComponent();
-        //                    xformComp.LocalPosition = new Vector2(tile.X + 0.5f, tile.Y + 0.5f);
-        //                    var xformNode = _serManager.WriteValueAs<MappingDataNode>(typeof(TransformComponent), new TransformComponent(), alwaysWrite: true);
-        //                    xformNode["parent"] = new ValueDataNode("1");
-        //                    //var coords = String.Format("{0}.5,{1}.5", tile.X, tile.Y);
-        //                    var componentSection = new MappingDataNode();
-        //                    //componentSection.Add(xformNode);
-        //                    var uidNode = new MappingDataNode()
-        //                    {
-        //                        { "uid", uid.ToString() },
-        //                        { "components", componentSection }
-        //                    };
-        //                    var protoEntities = new SequenceDataNode();
-        //                    protoEntities.Add(uidNode);
-        //                    var protoNode = new MappingDataNode()
-        //                    {
-        //                        { "proto", entitymap.Key },
-        //                        { "entities", protoEntities }
-        //                    };
-        //                    entities.Add(protoNode);
-        //                    uid++;
-        //                }
-        //            }
-        //            // write the floor tiles
-        //            foreach (var floormap in adapter.TileMap)
-        //            {
-        //                if (floormap.Value == obj)
-        //                {
-        //                    int chunkX = tile.X / 16;
-        //                    int chunkY = tile.Y / 16;
-        //                    chunkIds[chunkX * nChunksX + chunkY][tile.X % 16, tile.Y % 16] = floorToId[floormap.Key];
-        //                }
-        //            }
-        //        }
-        //        var chunks = new MappingDataNode();
-        //        for (var x = 0; x < nChunksX; x++)
-        //            for (var y = 0; 0 < nChunksY; y++)
-        //                chunks.Add(String.Format("{0},{1}", x, y), CreateChunk(chunkIds[x * nChunksX + y], x, y));
-//
-        //        var mapGridNode = new MappingDataNode()
-        //        {
-        //            {"type", "MapGrid"},
-        //            {"chunks", chunks}
-        //        };
-//
-        //        var mapNode = GenerateMapProto();
-        //        mapNode.Add("MapGrid", mapGridNode);
-        //        entities.Add(mapNode);
-        //    }
-        //
-        //    return new YamlDocument(root.ToYaml());
-        //}
 
         private string CreateChunk(int[,] tileIDs, int xOffs, int yOffs)
         {
@@ -258,8 +142,8 @@ namespace Dmm
                         try { typeId = tileIDs[x, y]; }
                         catch { typeId = 0; };
                         writer.Write(typeId);
-                        writer.Write([(byte) 0]);
-                        writer.Write([(byte) 0]);
+                        writer.Write((byte) 0);
+                        writer.Write((byte) 0);
                     }
                 }
             }
@@ -271,9 +155,5 @@ namespace Dmm
             return chunkStr;
         }
 
-        byte[] IntToByteArr(int num)
-        {
-            return BitConverter.GetBytes(num);
-        }
     }
 }
