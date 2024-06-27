@@ -85,7 +85,7 @@ namespace Dmm
                             + $"  - uid: {uid}\n"
                             + $"    components:\n"
                             + $"    - type: Transform\n"
-                            + $"      pos: {tile.X + 0.5},{tile.Y + 0.5}\n"
+                            + $"      pos: {tile.X + ".5"},{tile.Y + ".5"}\n"
                             + $"      parent: 1\n";
                             int chunkX = tile.X / 16;
                             int chunkY = tile.Y / 16;
@@ -125,20 +125,20 @@ namespace Dmm
                     chunks += CreateChunk(chunkIds[x * nChunksX + y], x, y);
             root += chunks;
             root +=
-            "- type: Broadphase\n"
-            + "- type: Physics\n"
-            + "  bodyStatus: InAir\n"
-            + "  angularDamping: 0.05\n"
-            + "  linearDamping: 0.05\n"
-            + "  fixedRotation: False\n"
-            + "  bodyType: Dynamic\n"
-            + "- type: Fixtures\n"
-            + "  fixtures: {}\n"
-            + "- type: BecomesStation\n"
-            + "  id: test\n"
-            + "- type: Gravity\n"
-            + "  gravityShakeSound: !type:SoundPathSpecifier\n"
-            + "    path: /Audio/Effects/alert.ogg\n";
+              "    - type: Broadphase\n"
+            + "    - type: Physics\n"
+            + "      bodyStatus: InAir\n"
+            + "      angularDamping: 0.05\n"
+            + "      linearDamping: 0.05\n"
+            + "      fixedRotation: False\n"
+            + "      bodyType: Dynamic\n"
+            + "    - type: Fixtures\n"
+            + "      fixtures: {}\n"
+            + "    - type: BecomesStation\n"
+            + "      id: test\n"
+            + "    - type: Gravity\n"
+            + "      gravityShakeSound: !type:SoundPathSpecifier\n"
+            + "        path: /Audio/Effects/alert.ogg\n";
             root += entityStr;
             root += "...\n";
             return root;
