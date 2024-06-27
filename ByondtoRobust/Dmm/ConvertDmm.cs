@@ -12,6 +12,12 @@ namespace Dmm
 
         public string ConvertToYaml(DmmMap map, DmmAdapter adapter)
         {
+            //var express = (136) * 300 + (300 - 128);
+            //var express = 143 * 300 + 143;
+            //Console.WriteLine("X:{0:N} Y:{1:N}", map.Tiles[express].X, map.Tiles[express].Y);
+            //foreach(var obj in map.Tiles[express].GetObjs()) {
+            //    Console.WriteLine(obj);
+            //}
             var root =
             "meta:\n"
             + "  format: 6\n"
@@ -59,13 +65,14 @@ namespace Dmm
             + "      chunks:\n";
             var entityStr = "";
             // write the floor tiles
-            for(var j = 0; j < chunkIds.Length - 1; j++) {
+            for(var j = 0; j < chunkIds.Length; j++) {
                 chunkIds[j] = new int[16,16];
                 //Console.WriteLine("aa");
             }
             int uid = 2;
             foreach (var tile in map.Tiles)
             {
+                var passed = false;
                 foreach (var obj in tile.Objs)
                 {
                     foreach (var entitymap in adapter.EntityMap)
@@ -83,7 +90,7 @@ namespace Dmm
                             int chunkX = tile.X / 16;
                             int chunkY = tile.Y / 16;
                             chunkIds[chunkX * nChunksX + chunkY][tile.X % 16, tile.Y % 16] = 1;
-
+                            passed = true;
                             //entities.Add(protoNode);
                             uid++;
                         }
@@ -95,9 +102,22 @@ namespace Dmm
                             int chunkX = tile.X / 16;
                             int chunkY = tile.Y / 16;
                             chunkIds[chunkX * nChunksX + chunkY][tile.X % 16, tile.Y % 16] = floorToId[floormap.Key];
+                            passed = true;
                         }
                     }
+                    
                 }
+                if (!passed) 
+                    {
+                        if ( Array.IndexOf(tile.GetObjs(), adapter.TileMap["Space"]) == -1 ) {
+                            int chunkX = tile.X / 16;
+                            int chunkY = tile.Y / 16;
+                            if(tile.X == 136 && tile.Y == (300 - 128)) {
+                                Console.WriteLine("hello vro");
+                            }
+                            chunkIds[chunkX * nChunksX + chunkY][tile.X % 16, tile.Y % 16] = 3;
+                        }
+                    }
             }
             var chunks = string.Empty;
             for (var x = 0; x < nChunksX; x++)
@@ -139,7 +159,14 @@ namespace Dmm
                 {
                     for (ushort x = 0; x < chunkSize; x++)
                     {
-                        try { typeId = tileIDs[x, y]; }
+                        try { 
+                            typeId = tileIDs[x, y]; 
+                            if(xOffs == 9 && yOffs == 9 && typeId != 0) {
+                                Console.WriteLine("NORMALIZED: X:{0:N} Y: {1:N}",x + 16 * xOffs, y + 16 * yOffs);
+                                Console.WriteLine("Type Id: " + typeId);
+                            }   
+
+                        }
                         catch { typeId = 0; };
                         writer.Write(typeId);
                         writer.Write((byte) 0);
