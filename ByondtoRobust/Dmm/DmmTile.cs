@@ -4,9 +4,9 @@ namespace Dmm
 {
     public sealed class DmmTile
     {
-        public readonly int X;
-        public readonly int Y;
-        public readonly int Z;
+        public int X;
+        public int Y;
+        public int Z;
         public readonly string[] Objs = Array.Empty<string>();
 
         ///<summary>

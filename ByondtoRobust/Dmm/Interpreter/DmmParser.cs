@@ -256,6 +256,14 @@ namespace Dmm
                 i++;
                 continue;
             }
+            List<DmmTile> dmmData2 = new List<DmmTile>();
+            for(var x = 0; x < maxX; x++) {
+                for(var y = 0; y < maxY; y++ ) {
+                    //Console.WriteLine(maxX -x);
+                    //Console.WriteLine(y);
+                    dmmData[(x * maxX ) + y].Y  = maxY - dmmData[(x * maxX ) + y].Y ;
+                }
+            }
             return new DmmMap(dmmData, maxX, maxY, maxZ);
         }
     }
